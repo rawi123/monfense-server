@@ -28,9 +28,15 @@ router.post("/add-pokemon/:id",auth,(req,res)=>{
     userController.addPokemon(req, res)
 })
 
+router.get("/score-board", auth, (req, res) => {
+    userController.scoreBoard(req, res)
+})
+
 router.get("/me", auth, (req, res) => {
     res.status(200).json(req.user)
 })
+
+
 
 
 

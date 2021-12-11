@@ -102,6 +102,20 @@ const addPokemon = async (req, res) => {
     }
 }
 
+const scoreBoard = async (req, res) => {
+    try {
+        let users = await User.find({ username: { $ne: "Guest" } });
+        users = users.map(user => {
+            return { gameWon: user.gameWon, gamesPlayed: user.gamesPlayed, username: user.username }
+        })
+        res.status(200).json(users);
+
+    }
+    catch (err) {
+        res.status(404).json(err);
+    }
+}
+
 module.exports = {
     login,
     register,
@@ -109,4 +123,5 @@ module.exports = {
     addWin,
     logout,
     addPokemon,
+    scoreBoard
 }
